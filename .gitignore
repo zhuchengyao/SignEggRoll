@@ -5,3 +5,16 @@ inference_ar_output/
 __pycache__/
 *.pyc
 *.npy
+*.pt
+*.pth
+*.pth.tar
+*.pth.tar.gz
+*.pth.tar.gz.part
+*.pth.tar.gz.part.1
+*.pth.tar.gz.part.2
+*.pth.tar.gz.part.3
+./checkpoints/
+demo_data/
+demo_data_output/
+inference_output/
+pose_frames/

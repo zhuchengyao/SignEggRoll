@@ -1,0 +1,68 @@
+{
+  "model": {
+    "mode": "mlsf",
+    "gloss_vocab_size": 10000,
+    "hidden_dim": 512,
+    "dropout": 0.1,
+    "text_encoder": {
+      "model_name": "bert-base-multilingual-cased",
+      "max_length": 128,
+      "hidden_dim": 768
+    },
+    "gloss_encoder": {
+      "vocab_size": 10000,
+      "embedding_dim": 256,
+      "hidden_dim": 512,
+      "num_layers": 2
+    },
+    "pose_decoder": {
+      "input_dim": 512,
+      "hidden_dim": 512,
+      "output_dim": 150,
+      "num_layers": 4,
+      "dropout": 0.1
+    },
+    "priority_learning": {
+      "enabled": true,
+      "alpha": 0.1,
+      "beta": 0.9
+    }
+  },
+  "data": {
+    "dataset_path": "datasets/signllm_data_complete",
+    "languages": ["ASL"],
+    "splits": {
+      "train": "dev",
+      "val": "dev"
+    },
+    "batch_size": 2,
+    "max_frames": 256,
+    "num_workers": 0,
+    "pose_dim": 256
+  },
+  "training": {
+    "num_epochs": 3,
+    "learning_rate": 1e-4,
+    "weight_decay": 0.01,
+    "gradient_clip": 1.0,
+    "use_scheduler": true,
+    "warmup_steps": 100,
+    "eval_every": 1,
+    "save_every": 1
+  },
+  "checkpoint": {
+    "save_dir": "checkpoints/signllm_your_data",
+    "resume_from": null
+  },
+  "logging": {
+    "log_dir": "logs/signllm_your_data",
+    "log_every": 10,
+    "use_tensorboard": true,
+    "use_wandb": false
+  },
+  "evaluation": {
+    "metrics": ["dtw_score", "pose_similarity", "motion_smoothness"],
+    "save_samples": true,
+    "sample_dir": "logs/signllm_your_data/samples"
+  }
+} 
