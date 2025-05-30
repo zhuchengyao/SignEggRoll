@@ -68,7 +68,7 @@ REAL_CONNECTIONS = [(start, end) for start, end, _ in REAL_SKELETON_STRUCTURE]
 class SignLLMInference3DViewer:
     """SignLLM推理结果3D可视化器"""
     
-    def __init__(self, model_path: str = None, model_size: str = "medium"):
+    def __init__(self, model_path: str = None, model_size: str = CONFIG.model_size):
         self.fig = None
         self.ax = None
         self.current_frame = 0

@@ -23,6 +23,10 @@ sys.path.append(str(Path(__file__).parent))
 
 from signllm_model import SignLLM, ModelConfig, CONFIG
 
+# 模型配置 - 与 signllm_train.py 保持一致
+DEFAULT_MODEL_SIZE = "tiny"  # 可选: "tiny", "small", "medium", "large"
+DEFAULT_MODEL_MODE = "mlsf"  # 默认模式
+
 # 真实的50关节点骨架连接
 REAL_SKELETON_STRUCTURE = [
     # head
@@ -87,7 +91,16 @@ class SimpleInferenceViewer:
                     # 使用保存的配置
                     saved_config = checkpoint['config']
                     print(f"📦 使用checkpoint中的配置...")
-                    CONFIG = saved_config
+                    # 从保存的配置字典重建 ModelConfig 对象
+                    if isinstance(saved_config, dict) and 'model_size' in saved_config:
+                        CONFIG = ModelConfig(saved_config['model_size'])
+                        # 更新其他配置属性
+                        for key, value in saved_config.items():
+                            if hasattr(CONFIG, key):
+                                setattr(CONFIG, key, value)
+                    else:
+                        # 如果配置格式不正确，使用默认值
+                        CONFIG = ModelConfig(model_size)
                 elif 'model_size' in checkpoint:
                     # 使用保存的模型大小
                     saved_size = checkpoint['model_size']
@@ -103,11 +116,11 @@ class SimpleInferenceViewer:
                         
                         if hidden_dim == 256:
                             inferred_size = "tiny"
-                        elif hidden_dim == 384:
-                            inferred_size = "small"  
                         elif hidden_dim == 512:
-                            inferred_size = "medium"
+                            inferred_size = "small"  
                         elif hidden_dim == 768:
+                            inferred_size = "medium"
+                        elif hidden_dim == 1024:
                             inferred_size = "large"
                         else:
                             inferred_size = model_size  # 使用默认值
@@ -375,7 +388,7 @@ Q 退出
 def main():
     """主函数"""
     parser = argparse.ArgumentParser(description="简单的SignLLM推理可视化器")
-    parser.add_argument("--model_path", type=str, default="checkpoints/eggroll_train/epoch_10.pth",
+    parser.add_argument("--model_path", type=str, default="checkpoints/eggroll_train/epoch_4.pth",
                        help="训练模型路径")
     parser.add_argument("--model_size", type=str, default="tiny", choices=["tiny", "small", "medium", "large"],
                        help="模型大小")

@@ -119,7 +119,7 @@ class ModelEvaluationViewer:
         model.eval()
         return model
     
-    def evaluate_model(self, data_dir: str, split: str = "dev", max_samples: int = 20, mode: str = "mlsf"):
+    def evaluate_model(self, data_dir: str, split: str = "test", max_samples: int = 20, mode: str = "mlsf"):
         """在数据集上评估模型"""
         print(f"\n🎯 开始模型评估...")
         print(f"   数据集: {split}")

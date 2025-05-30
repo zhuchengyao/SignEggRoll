@@ -27,6 +27,9 @@ sys.path.append(str(Path(__file__).parent))
 
 from signllm_model import SignLLM, ModelConfig, CONFIG
 
+# 模型配置 - 与 signllm_train.py 保持一致
+MODEL_SIZE = "small"  # 可选: "tiny", "small", "medium", "large"
+MODEL_MODE = "prompt2langgloss"  # 默认模式
 
 # 真实的50关节点骨架连接
 REAL_SKELETON_STRUCTURE = [
@@ -80,6 +83,10 @@ class Interactive3DViewer:
         """加载真实数据集进行可视化"""
         print("🚀 交互式3D骨架查看器")
         print("=" * 50)
+        
+        # 当前配置信息（与 signllm_train.py 保持一致）
+        print(f"📋 模型配置: SIZE={MODEL_SIZE}, MODE={MODEL_MODE}")
+        print("📝 注意: 当前使用真实数据集，未使用模型生成")
         
         # 直接读取原始数据，获得真实的帧数
         print("📚 直接加载原始数据...")
@@ -785,7 +792,7 @@ class Interactive3DViewer:
             print(f"🔄 切换到 {mode_str}")
             self.update_plot()
         elif event.key == 'a':  # 生成2D动画
-            print(f"�� 开始生成当前文本的2D动画...")
+            print(f"🎬 开始生成当前文本的2D动画...")
             try:
                 self.generate_2d_animation()
             except Exception as e:
@@ -838,6 +845,7 @@ def main():
         # 启动交互式查看器
         print(f"\n🎮 启动交互式3D查看器 (真实数据)...")
         print(f"   加载了 {len(pose_data_list)} 个真实样本的姿态数据")
+        print(f"   配置: 模型大小={MODEL_SIZE}, 模式={MODEL_MODE}")
         
         viewer.create_interactive_viewer(pose_data_list)
         
