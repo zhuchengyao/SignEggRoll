@@ -1,339 +1,352 @@
-# SignLLM: Sign Language Production Large Language Models
+# 3D人体姿态生成的扩散模型 (Diffusion Model for 3D Human Pose Generation)
 
-这是SignLLM论文的完整复现实现，支持多语言手语生成，包含MLSF和Prompt2LangGloss两种模式。
+这个项目实现了一个基于扩散模型的3D人体姿态生成系统。模型能够学习人体结构的分布，并通过逐步去噪的过程生成新的、合理的3D姿态。
 
-## 📋 目录
+## 🎯 项目特点
 
-- [论文简介](#论文简介)
-- [环境安装](#环境安装)
-- [数据准备](#数据准备)
-- [模型训练](#模型训练)
-- [推理使用](#推理使用)
-- [评估](#评估)
-- [项目结构](#项目结构)
-- [复现结果](#复现结果)
+- **扩散模型架构**: 基于DDPM (Denoising Diffusion Probabilistic Models) 实现
+- **3D姿态建模**: 针对67个关键点的3D坐标进行建模
+- **数据增强**: 包含旋转、缩放、平移等数据增强技术
+- **可视化支持**: 提供丰富的可视化和动画生成功能
+- **模块化设计**: 代码结构清晰，易于扩展和修改
 
-## 📖 论文简介
+## 📦 项目结构
 
-SignLLM是一个多语言手语生成大语言模型，主要特点包括：
-
-- **两种生成模式**：
-  - MLSF (Multi-Language Switching Framework): 多语言切换框架
-  - Prompt2LangGloss: 提示到语言gloss模式
-
-- **强化学习组件**：
-  - Priority Learning Channel (PLC): 优先级学习通道
-  - RL损失函数：提高生成质量
-
-- **多语言支持**：支持8种手语
-  - ASL (美国手语)
-  - DGS (德国手语)
-  - KSL (韩国手语)
-  - DSGS (德语瑞士手语)
-  - LSF-CH (法语瑞士手语)
-  - LIS-CH (意大利语瑞士手语)
-  - LSA (阿根廷手语)
-  - TSL (土耳其手语)
-
-## 🛠 环境安装
-
-### 1. 克隆仓库
-```bash
-git clone <repository-url>
-cd signllm
+```
+.
+├── diffusion_model.py      # 扩散模型核心实现
+├── pose_dataset.py         # 数据加载和预处理
+├── train_diffusion.py      # 训练脚本
+├── generate_poses.py       # 生成脚本
+├── demo.py                 # 快速演示脚本
+├── requirements.txt        # 依赖包列表
+└── README.md              # 项目说明文档
 ```
 
-### 2. 创建虚拟环境
-```bash
-conda create -n signllm python=3.8
-conda activate signllm
-```
+## 🚀 快速开始
 
-### 3. 安装依赖
+### 1. 环境设置
+
+首先安装所需的依赖包：
+
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. 安装额外依赖
-```bash
-# 安装fastdtw用于DTW计算
-pip install fastdtw
+主要依赖：
+- PyTorch >= 1.10.0
+- NumPy >= 1.21.0
+- Matplotlib >= 3.3.0
+- tqdm, wandb (可选)
 
-# 安装NLTK数据
-python -c "import nltk; nltk.download('punkt')"
+### 2. 数据准备
+
+确保你的数据采用 `.skels` 格式：
+- 每行包含 67×3=201 个浮点数
+- 代表67个关键点的x,y,z坐标
+- 每一帧作为一行
+
+数据格式示例：
+```
+x1 y1 z1 x2 y2 z2 ... x67 y67 z67
+x1 y1 z1 x2 y2 z2 ... x67 y67 z67
+...
 ```
 
-## 📊 数据准备
+### 3. 快速演示
 
-### 1. 数据格式
-
-SignLLM使用标准化的姿态数据格式：
-- **姿态维度**: 150维 (上身8个关键点 + 双手42个关键点)
-- **数据格式**: JSON格式，包含姿态序列和对应文本
-
-### 2. 数据处理
-
-#### 从原始视频处理数据：
-```python
-from data_processor import DataProcessor
-
-# 创建数据处理器
-processor = DataProcessor("./processed_data")
-
-# 处理ASL数据
-processor.process_video_dataset(
-    video_dir="./raw_data/ASL/videos",
-    annotation_file="./raw_data/ASL/annotations.json",
-    language="ASL",
-    split="train"
-)
-```
-
-#### 使用现有的Prompt2Sign数据：
-```bash
-# 下载Prompt2Sign数据集
-# 参考：https://signllm.github.io/Prompt2Sign/
-
-# 将数据放置在以下目录结构：
-datasets/
-├── processed/
-│   ├── ASL/
-│   │   ├── train/
-│   │   ├── val/
-│   │   └── test/
-│   ├── DGS/
-│   └── ...
-```
-
-### 3. 数据目录结构
-```
-datasets/processed/
-├── ASL/
-│   ├── train/
-│   │   ├── sample_000001/
-│   │   │   ├── text.txt
-│   │   │   └── pose.json
-│   │   └── ...
-│   ├── val/
-│   └── test/
-└── DGS/
-    ├── train/
-    ├── val/
-    └── test/
-```
-
-## 🚀 模型训练
-
-### 1. MLSF模式训练
+运行演示脚本快速测试整个流程：
 
 ```bash
-python train_signllm.py \
-    --config configs/signllm_mlsf_config.json \
-    --output_dir ./outputs/signllm_mlsf
+# 测试数据加载（不训练）
+python demo.py --data_dir ./datasets/processed --skip_training
+
+# 完整演示（包含快速训练）
+python demo.py --data_dir ./datasets/processed --quick_test --epochs 50
 ```
 
-### 2. Prompt2LangGloss模式训练
+## 📖 详细使用方法
+
+### 训练模型
 
 ```bash
-python train_signllm.py \
-    --config configs/signllm_prompt2langgloss_config.json \
-    --output_dir ./outputs/signllm_prompt2langgloss
+python train_diffusion.py --data_dir ./datasets/processed \
+                          --batch_size 32 \
+                          --num_epochs 1000 \
+                          --learning_rate 1e-4 \
+                          --model_channels 128 \
+                          --device cuda
 ```
 
-### 3. 自定义训练配置
+训练参数说明：
+- `--data_dir`: 数据目录路径
+- `--batch_size`: 批次大小
+- `--num_epochs`: 训练轮数
+- `--learning_rate`: 学习率
+- `--model_channels`: 模型通道数
+- `--num_timesteps`: 扩散步数 (默认1000)
+- `--no_wandb`: 禁用wandb日志记录
 
-修改配置文件中的参数：
-```json
-{
-  "model": {
-    "hidden_dim": 1024,
-    "pose_dim": 150
-  },
-  "training": {
-    "epochs": 100,
-    "batch_size": 8,
-    "lr": 1e-4
-  }
-}
-```
-
-### 4. 恢复训练
+### 生成姿态
 
 ```bash
-python train_signllm.py \
-    --config configs/signllm_mlsf_config.json \
-    --resume ./outputs/signllm_mlsf/latest_model.pt
+# 生成静态姿态
+python generate_poses.py --checkpoint ./checkpoints/best_model.pth \
+                         --num_samples 8 \
+                         --visualize \
+                         --format skels
+
+# 生成动画
+python generate_poses.py --checkpoint ./checkpoints/best_model.pth \
+                         --animation \
+                         --num_frames 30 \
+                         --visualize
 ```
 
-## 🔮 推理使用
+生成参数说明：
+- `--checkpoint`: 模型检查点路径
+- `--num_samples`: 生成样本数量
+- `--output_dir`: 输出目录
+- `--format`: 保存格式 (skels/npy/json)
+- `--visualize`: 可视化结果
+- `--animation`: 生成动画
+- `--num_frames`: 动画帧数
 
-### 1. 单个文本生成
+### 数据分析
 
 ```bash
-python inference_signllm.py \
-    --model_path ./outputs/signllm_mlsf/best_model.pt \
-    --text "Hello, how are you?" \
-    --language ASL \
-    --mode mlsf \
-    --visualize
+# 测试数据加载和可视化
+python pose_dataset.py
 ```
 
-### 2. 批量生成
+## 🔧 模型架构
 
-```bash
-# 创建文本文件
-echo -e "Hello world\nHow are you\nNice to meet you" > texts.txt
+### 扩散模型 (Diffusion Model)
 
-python inference_signllm.py \
-    --model_path ./outputs/signllm_mlsf/best_model.pt \
-    --texts_file texts.txt \
-    --language ASL \
-    --mode mlsf \
-    --output_dir ./inference_results
-```
+模型基于高斯扩散过程：
 
-### 3. 交互式演示
+1. **前向过程**: 逐步向数据添加高斯噪声
+   ```
+   q(x_t|x_{t-1}) = N(x_t; √(1-β_t)x_{t-1}, β_t I)
+   ```
 
-```bash
-python inference_signllm.py \
-    --model_path ./outputs/signllm_mlsf/best_model.pt \
-    --interactive
-```
+2. **反向过程**: 训练神经网络学习去噪
+   ```
+   p_θ(x_{t-1}|x_t) = N(x_{t-1}; μ_θ(x_t,t), Σ_θ(x_t,t))
+   ```
 
-### 4. Python API使用
+### U-Net架构
+
+使用1D U-Net处理序列化的3D姿态数据：
+
+- **编码器**: 下采样路径，提取特征
+- **解码器**: 上采样路径，重建姿态
+- **跳跃连接**: 保持细节信息
+- **注意力机制**: 增强关键点间的关联
+
+### 关键特性
+
+- **时间嵌入**: 正弦位置编码表示扩散时间步
+- **残差连接**: 稳定训练过程
+- **组归一化**: 提高训练稳定性
+- **余弦噪声调度**: 更好的噪声分布
+
+## 📊 数据处理
+
+### 预处理步骤
+
+1. **数据加载**: 从.skels文件读取3D坐标
+2. **标准化**: Z-score标准化，均值0方差1
+3. **数据增强**: 
+   - 随机旋转 (±30°)
+   - 随机缩放 (0.9-1.1倍)
+   - 随机平移
+   - 高斯噪声
+
+### 数据增强
 
 ```python
-from inference_signllm import SignLLMInference
+# 旋转增强
+rotation_matrix = [[cos_θ, 0, sin_θ],
+                   [0, 1, 0],
+                   [-sin_θ, 0, cos_θ]]
 
-# 创建推理器
-inference = SignLLMInference("./outputs/signllm_mlsf/best_model.pt")
+# 缩放增强
+pose *= scale_factor
 
-# 生成手语姿态
-result = inference.generate_single(
-    text="Hello world",
-    language="ASL",
-    mode="mlsf",
-    visualize=True,
-    output_dir="./demo_output"
-)
-
-print(f"Generated {result['num_frames']} frames")
-print(f"Quality score: {result['quality_scores'].mean():.3f}")
+# 平移增强
+pose += translation_vector
 ```
 
-## 📈 评估
+## 🎨 可视化功能
 
-### 1. 运行评估
+### 3D姿态可视化
 
 ```python
-from evaluation import SignLLMEvaluator
+from pose_dataset import visualize_pose_data
 
-evaluator = SignLLMEvaluator()
-
-# 评估姿态生成质量
-metrics = evaluator.evaluate_poses(predictions, targets)
-print(f"DTW Score: {metrics['dtw_score']:.4f}")
-print(f"Pose Similarity: {metrics['pose_similarity']:.4f}")
+# 可视化数据集样本
+visualize_pose_data(dataset, num_samples=5)
 ```
 
-### 2. 评估指标
+### 生成动画
 
-- **DTW Score**: 动态时间规整分数
-- **Pose Similarity**: 姿态相似度
-- **Motion Smoothness**: 运动平滑度
-- **BLEU Score**: 用于gloss评估
-- **MSE/MAE**: 均方误差和平均绝对误差
+```python
+from generate_poses import create_gif_from_poses
 
-## 📁 项目结构
-
-```
-signllm/
-├── signllm_model.py          # SignLLM模型实现
-├── data_processor.py         # 数据处理模块
-├── train_signllm.py         # 训练脚本
-├── inference_signllm.py     # 推理脚本
-├── evaluation.py            # 评估模块
-├── utils.py                 # 工具函数
-├── requirements.txt         # 依赖包
-├── configs/                 # 配置文件
-│   ├── signllm_mlsf_config.json
-│   └── signllm_prompt2langgloss_config.json
-├── datasets/               # 数据集目录
-├── outputs/               # 训练输出
-├── Prompt2Sign/          # Prompt2Sign工具
-└── README.md
+# 创建GIF动画
+create_gif_from_poses(pose_sequence, "animation.gif")
 ```
 
-## 🎯 复现结果
+## ⚙️ 训练技巧
 
-### 1. 预期性能指标
+### 超参数调优
 
-根据论文，在ASL数据集上的预期结果：
+推荐的超参数设置：
 
-| 模式 | DTW Score | BLEU-4 | Pose Similarity |
-|------|-----------|--------|-----------------|
-| MLSF | 0.85+ | - | 0.80+ |
-| Prompt2LangGloss | 0.83+ | 50.41 | 0.78+ |
+```python
+# 模型参数
+model_channels = 128        # 基础通道数
+channel_mult = (1, 2, 4, 8) # 通道倍数
+num_res_blocks = 2          # 残差块数量
 
-### 2. 训练时间
+# 训练参数
+batch_size = 32            # 批次大小
+learning_rate = 1e-4       # 学习率
+num_epochs = 1000          # 训练轮数
+num_timesteps = 1000       # 扩散步数
 
-- **MLSF模式**: 约24小时 (单GPU V100)
-- **Prompt2LangGloss模式**: 约36小时 (单GPU V100)
+# 调度器
+scheduler = "cosine"       # 余弦调度
+```
 
-### 3. 模型大小
+### 训练监控
 
-- **参数量**: 约40M (MLSF) / 45M (Prompt2LangGloss)
-- **模型文件**: 约160MB / 180MB
+使用Wandb监控训练过程：
 
-## 🔧 故障排除
+```python
+# 记录损失
+wandb.log({"train_loss": loss})
 
-### 1. 常见问题
+# 记录生成样本
+wandb.log({"samples": wandb.Image("samples.png")})
+```
 
-**Q: 训练时显存不足**
+## 🔍 故障排除
+
+### 常见问题
+
+1. **CUDA内存不足**
+   ```bash
+   # 减小批次大小
+   python train_diffusion.py --batch_size 16
+   
+   # 使用CPU
+   python train_diffusion.py --device cpu
+   ```
+
+2. **数据加载失败**
+   ```bash
+   # 检查数据格式
+   python pose_dataset.py
+   
+   # 限制文件数量
+   python train_diffusion.py --max_files 10
+   ```
+
+3. **训练不稳定**
+   ```bash
+   # 降低学习率
+   python train_diffusion.py --learning_rate 5e-5
+   
+   # 使用较少的扩散步数
+   python train_diffusion.py --num_timesteps 500
+   ```
+
+### 调试模式
+
+使用调试参数进行快速测试：
+
 ```bash
-# 减小batch_size
-# 在配置文件中修改：
-"batch_size": 4  # 从8改为4
+python train_diffusion.py --data_dir ./datasets/processed \
+                          --max_files 2 \
+                          --num_epochs 10 \
+                          --batch_size 4 \
+                          --no_wandb
 ```
 
-**Q: 数据加载错误**
-```bash
-# 检查数据目录结构
-# 确保每个样本目录包含text.txt和pose.json
+## 🚀 扩展功能
+
+### 条件生成
+
+可以扩展模型支持条件生成：
+
+```python
+# 添加条件嵌入
+class ConditionalUNet1D(UNet1D):
+    def __init__(self, condition_dim, **kwargs):
+        super().__init__(**kwargs)
+        self.condition_proj = nn.Linear(condition_dim, self.model_channels)
+    
+    def forward(self, x, timesteps, condition=None):
+        # 融合条件信息
+        if condition is not None:
+            cond_emb = self.condition_proj(condition)
+            # 将条件嵌入融合到网络中
 ```
 
-**Q: 模型收敛慢**
-```bash
-# 调整学习率
-"lr": 5e-5  # 从1e-4改为5e-5
+### 序列生成
+
+扩展为时序姿态生成：
+
+```python
+# 时序扩散模型
+class TemporalDiffusion(GaussianDiffusion):
+    def __init__(self, sequence_length, **kwargs):
+        super().__init__(**kwargs)
+        self.sequence_length = sequence_length
+    
+    def sample_sequence(self, model, num_samples=1):
+        # 生成连续的姿态序列
+        pass
 ```
 
-### 2. 性能优化
+## 📚 参考文献
 
-- 使用混合精度训练：在配置中添加 `"use_amp": true`
-- 增加数据并行：使用多GPU训练
-- 优化数据加载：增加 `num_workers`
-
-## 📚 参考资料
-
-- [SignLLM论文](https://arxiv.org/abs/2405.10718)
-- [Prompt2Sign数据集](https://signllm.github.io/Prompt2Sign/)
-- [项目主页](https://signllm.github.io/)
+- [Denoising Diffusion Probabilistic Models (DDPM)](https://arxiv.org/abs/2006.11239)
+- [Improved Denoising Diffusion Probabilistic Models](https://arxiv.org/abs/2102.09672)
+- [Diffusion Models Beat GANs on Image Synthesis](https://arxiv.org/abs/2105.05233)
 
 ## 📄 许可证
 
-本项目遵循Creative Commons Attribution-NonCommercial 4.0 International License。
+本项目采用MIT许可证 - 详见LICENSE文件
 
 ## 🤝 贡献
 
-欢迎提交Issue和Pull Request来改进这个实现！
+欢迎提交问题和拉取请求！请确保：
 
-## 📧 联系
+1. 代码符合项目风格
+2. 添加适当的测试
+3. 更新相关文档
 
-如有问题，请通过以下方式联系：
-- 提交GitHub Issue
-- 邮箱：[项目维护者邮箱]
+## 📞 联系方式
+
+如有问题或建议，请提交GitHub Issue或联系项目维护者。
 
 ---
 
-**注意**: 这是SignLLM论文的复现实现，用于学术研究目的。请确保遵循相关的数据使用协议和许可证要求。 
+**快速开始命令总结：**
+
+```bash
+# 1. 安装依赖
+pip install -r requirements.txt
+
+# 2. 快速演示
+python demo.py --data_dir ./datasets/processed --quick_test
+
+# 3. 完整训练
+python train_diffusion.py --data_dir ./datasets/processed
+
+# 4. 生成姿态
+python generate_poses.py --checkpoint ./checkpoints/best_model.pth --visualize
+``` 

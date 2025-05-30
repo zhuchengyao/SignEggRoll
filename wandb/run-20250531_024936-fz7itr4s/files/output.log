@@ -1,0 +1,248 @@
+ASL Text-to-Pose训练器初始化完成:
+  设备: cuda
+  数据集大小: 31047
+  批次大小: 8
+  学习率: 0.0001
+  训练轮数: 1000
+  姿态规格: 100帧 x 120维
+  保存目录: checkpoints/asl_text2pose_20250531_024935
+开始训练ASL Text-to-Pose模型...
+Epoch 1/1000: 100%|██████████████████████████████████████████████████████████████| 3880/3880 [27:09<00:00,  2.38it/s, loss=0.106011, lr=1.00e-04]
+Epoch 1: Train Loss = 0.273947, Val Loss = 0.193175
+生成姿态样本 (Epoch 1)
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 24103 (\N{CJK UNIFIED IDEOGRAPH-5E27}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 25968 (\N{CJK UNIFIED IDEOGRAPH-6570}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 22352 (\N{CJK UNIFIED IDEOGRAPH-5750}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 26631 (\N{CJK UNIFIED IDEOGRAPH-6807}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 36523 (\N{CJK UNIFIED IDEOGRAPH-8EAB}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 20307 (\N{CJK UNIFIED IDEOGRAPH-4F53}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 20851 (\N{CJK UNIFIED IDEOGRAPH-5173}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 38190 (\N{CJK UNIFIED IDEOGRAPH-952E}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 28857 (\N{CJK UNIFIED IDEOGRAPH-70B9}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 36712 (\N{CJK UNIFIED IDEOGRAPH-8F68}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 36857 (\N{CJK UNIFIED IDEOGRAPH-8FF9}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 24038 (\N{CJK UNIFIED IDEOGRAPH-5DE6}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 25163 (\N{CJK UNIFIED IDEOGRAPH-624B}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 21491 (\N{CJK UNIFIED IDEOGRAPH-53F3}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 29305 (\N{CJK UNIFIED IDEOGRAPH-7279}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 24449 (\N{CJK UNIFIED IDEOGRAPH-5F81}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 32500 (\N{CJK UNIFIED IDEOGRAPH-7EF4}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 24230 (\N{CJK UNIFIED IDEOGRAPH-5EA6}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 23039 (\N{CJK UNIFIED IDEOGRAPH-59FF}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 24577 (\N{CJK UNIFIED IDEOGRAPH-6001}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 28909 (\N{CJK UNIFIED IDEOGRAPH-70ED}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 21147 (\N{CJK UNIFIED IDEOGRAPH-529B}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 22270 (\N{CJK UNIFIED IDEOGRAPH-56FE}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 29983 (\N{CJK UNIFIED IDEOGRAPH-751F}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 25104 (\N{CJK UNIFIED IDEOGRAPH-6210}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 26679 (\N{CJK UNIFIED IDEOGRAPH-6837}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 26412 (\N{CJK UNIFIED IDEOGRAPH-672C}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 22352 (\N{CJK UNIFIED IDEOGRAPH-5750}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 26631 (\N{CJK UNIFIED IDEOGRAPH-6807}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 36523 (\N{CJK UNIFIED IDEOGRAPH-8EAB}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 20307 (\N{CJK UNIFIED IDEOGRAPH-4F53}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 20851 (\N{CJK UNIFIED IDEOGRAPH-5173}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 38190 (\N{CJK UNIFIED IDEOGRAPH-952E}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 28857 (\N{CJK UNIFIED IDEOGRAPH-70B9}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 36712 (\N{CJK UNIFIED IDEOGRAPH-8F68}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 36857 (\N{CJK UNIFIED IDEOGRAPH-8FF9}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 24103 (\N{CJK UNIFIED IDEOGRAPH-5E27}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 25968 (\N{CJK UNIFIED IDEOGRAPH-6570}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 24038 (\N{CJK UNIFIED IDEOGRAPH-5DE6}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 25163 (\N{CJK UNIFIED IDEOGRAPH-624B}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 21491 (\N{CJK UNIFIED IDEOGRAPH-53F3}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 29305 (\N{CJK UNIFIED IDEOGRAPH-7279}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 24449 (\N{CJK UNIFIED IDEOGRAPH-5F81}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 32500 (\N{CJK UNIFIED IDEOGRAPH-7EF4}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 24230 (\N{CJK UNIFIED IDEOGRAPH-5EA6}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 23039 (\N{CJK UNIFIED IDEOGRAPH-59FF}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 24577 (\N{CJK UNIFIED IDEOGRAPH-6001}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 28909 (\N{CJK UNIFIED IDEOGRAPH-70ED}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 21147 (\N{CJK UNIFIED IDEOGRAPH-529B}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 22270 (\N{CJK UNIFIED IDEOGRAPH-56FE}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 29983 (\N{CJK UNIFIED IDEOGRAPH-751F}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 25104 (\N{CJK UNIFIED IDEOGRAPH-6210}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 26679 (\N{CJK UNIFIED IDEOGRAPH-6837}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 26412 (\N{CJK UNIFIED IDEOGRAPH-672C}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 24103 (\N{CJK UNIFIED IDEOGRAPH-5E27}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 25968 (\N{CJK UNIFIED IDEOGRAPH-6570}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 22352 (\N{CJK UNIFIED IDEOGRAPH-5750}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 26631 (\N{CJK UNIFIED IDEOGRAPH-6807}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 36523 (\N{CJK UNIFIED IDEOGRAPH-8EAB}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 20307 (\N{CJK UNIFIED IDEOGRAPH-4F53}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 20851 (\N{CJK UNIFIED IDEOGRAPH-5173}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 38190 (\N{CJK UNIFIED IDEOGRAPH-952E}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 28857 (\N{CJK UNIFIED IDEOGRAPH-70B9}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 36712 (\N{CJK UNIFIED IDEOGRAPH-8F68}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 36857 (\N{CJK UNIFIED IDEOGRAPH-8FF9}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 24038 (\N{CJK UNIFIED IDEOGRAPH-5DE6}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 25163 (\N{CJK UNIFIED IDEOGRAPH-624B}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 21491 (\N{CJK UNIFIED IDEOGRAPH-53F3}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 29305 (\N{CJK UNIFIED IDEOGRAPH-7279}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 24449 (\N{CJK UNIFIED IDEOGRAPH-5F81}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 32500 (\N{CJK UNIFIED IDEOGRAPH-7EF4}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 24230 (\N{CJK UNIFIED IDEOGRAPH-5EA6}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 23039 (\N{CJK UNIFIED IDEOGRAPH-59FF}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 24577 (\N{CJK UNIFIED IDEOGRAPH-6001}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 28909 (\N{CJK UNIFIED IDEOGRAPH-70ED}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 21147 (\N{CJK UNIFIED IDEOGRAPH-529B}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 22270 (\N{CJK UNIFIED IDEOGRAPH-56FE}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 29983 (\N{CJK UNIFIED IDEOGRAPH-751F}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 25104 (\N{CJK UNIFIED IDEOGRAPH-6210}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 26679 (\N{CJK UNIFIED IDEOGRAPH-6837}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:225: UserWarning: Glyph 26412 (\N{CJK UNIFIED IDEOGRAPH-672C}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 22352 (\N{CJK UNIFIED IDEOGRAPH-5750}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 26631 (\N{CJK UNIFIED IDEOGRAPH-6807}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 36523 (\N{CJK UNIFIED IDEOGRAPH-8EAB}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 20307 (\N{CJK UNIFIED IDEOGRAPH-4F53}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 20851 (\N{CJK UNIFIED IDEOGRAPH-5173}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 38190 (\N{CJK UNIFIED IDEOGRAPH-952E}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 28857 (\N{CJK UNIFIED IDEOGRAPH-70B9}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 36712 (\N{CJK UNIFIED IDEOGRAPH-8F68}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 36857 (\N{CJK UNIFIED IDEOGRAPH-8FF9}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 24103 (\N{CJK UNIFIED IDEOGRAPH-5E27}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 25968 (\N{CJK UNIFIED IDEOGRAPH-6570}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 24038 (\N{CJK UNIFIED IDEOGRAPH-5DE6}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 25163 (\N{CJK UNIFIED IDEOGRAPH-624B}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 21491 (\N{CJK UNIFIED IDEOGRAPH-53F3}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 29305 (\N{CJK UNIFIED IDEOGRAPH-7279}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 24449 (\N{CJK UNIFIED IDEOGRAPH-5F81}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 32500 (\N{CJK UNIFIED IDEOGRAPH-7EF4}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 24230 (\N{CJK UNIFIED IDEOGRAPH-5EA6}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 23039 (\N{CJK UNIFIED IDEOGRAPH-59FF}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 24577 (\N{CJK UNIFIED IDEOGRAPH-6001}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 28909 (\N{CJK UNIFIED IDEOGRAPH-70ED}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 21147 (\N{CJK UNIFIED IDEOGRAPH-529B}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 22270 (\N{CJK UNIFIED IDEOGRAPH-56FE}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 29983 (\N{CJK UNIFIED IDEOGRAPH-751F}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 25104 (\N{CJK UNIFIED IDEOGRAPH-6210}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 26679 (\N{CJK UNIFIED IDEOGRAPH-6837}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+D:\Graduate thesis\eggroll\train_text2video.py:251: UserWarning: Glyph 26412 (\N{CJK UNIFIED IDEOGRAPH-672C}) missing from font(s) DejaVu Sans.
+  plt.savefig(save_path, dpi=150, bbox_inches='tight')
+生成样本可视化已保存
+[34m[1mwandb[0m: [33mWARNING[0m Tried to log to step 0 that is less than the current step 3880. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.
+[34m[1mwandb[0m: [33mWARNING[0m Tried to log to step 0 that is less than the current step 3880. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.
+保存最佳模型 (损失: 0.273947)
+Epoch 2/1000:  18%|███████████▌                                                   | 712/3880 [03:45<16:43,  3.16it/s, loss=0.205107, lr=1.00e-04]
+Traceback (most recent call last):
+  File "D:\Graduate thesis\eggroll\train_text2video.py", line 441, in <module>
+    main()
+  File "D:\Graduate thesis\eggroll\train_text2video.py", line 438, in main
+    trainer.train()
+  File "D:\Graduate thesis\eggroll\train_text2video.py", line 317, in train
+    loss.backward()
+  File "C:\Users\22949\AppData\Roaming\Python\Python312\site-packages\torch\_tensor.py", line 626, in backward
+    torch.autograd.backward(
+  File "C:\Users\22949\AppData\Roaming\Python\Python312\site-packages\torch\autograd\__init__.py", line 347, in backward
+    _engine_run_backward(
+  File "C:\Users\22949\AppData\Roaming\Python\Python312\site-packages\torch\autograd\graph.py", line 823, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
