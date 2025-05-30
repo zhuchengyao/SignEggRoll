@@ -124,7 +124,8 @@ class PriorityLearningChannel(nn.Module):
         self.priority_attention = nn.MultiheadAttention(
             embed_dim=CONFIG.hidden_dim,
             num_heads=CONFIG.num_heads,
-            dropout=CONFIG.dropout
+            dropout=CONFIG.dropout,
+            batch_first=True
         )
         
         # 优先级权重网络

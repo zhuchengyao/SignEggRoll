@@ -1,6 +1,6 @@
 """
 SignLLM推理脚本
-用于从文本生成手语姿态
+用于从文本生成手语姿态 - 支持优化版本模型
 """
 
 import torch
@@ -11,7 +11,7 @@ from pathlib import Path
 from typing import List, Dict, Optional
 import logging
 
-from signllm_model import SignLLM
+from signllm_model_optimized import OptimizedSignLLM, ModelConfig, CONFIG
 from utils import load_checkpoint, PoseVisualizer, get_device_info
 from data_processor import PoseNormalizer
 
@@ -47,22 +47,25 @@ class SignLLMInference:
         """获取默认配置"""
         return {
             "model": {
-                "languages": ["ASL", "DGS", "KSL", "DSGS", "LSF-CH", "LIS-CH", "LSA", "TSL"],
-                "gloss_vocab_size": 10000,
-                "hidden_dim": 1024,
+                "languages": ["ASL"],
+                "model_size": "medium",  # 恢复为medium配置
                 "pose_dim": 150
             }
         }
     
-    def _load_model(self, model_path: str) -> SignLLM:
+    def _load_model(self, model_path: str) -> OptimizedSignLLM:
         """加载模型"""
+        # 设置全局配置
+        global CONFIG
+        CONFIG = ModelConfig(self.config["model"]["model_size"])
+        
         # 创建模型
-        model = SignLLM(
-            languages=self.config["model"]["languages"],
-            gloss_vocab_size=self.config["model"]["gloss_vocab_size"],
-            hidden_dim=self.config["model"]["hidden_dim"],
-            pose_dim=self.config["model"]["pose_dim"]
-        )
+        model = OptimizedSignLLM(languages=self.config["model"]["languages"])
+        
+        # 先运行一次前向传播来创建动态层
+        dummy_text = ["hello"]
+        with torch.no_grad():
+            model(dummy_text, "ASL", max_length=16)
         
         # 加载权重
         checkpoint = torch.load(model_path, map_location=self.device)
@@ -84,26 +87,9 @@ class SignLLMInference:
             raise ValueError(f"Unsupported language: {language}")
         
         with torch.no_grad():
-            if mode == "mlsf":
-                poses, quality_scores = self.model(
-                    texts, 
-                    language, 
-                    mode="mlsf",
-                    max_length=max_length
-                )
-                return poses.cpu().numpy(), quality_scores.cpu().numpy()
-            
-            elif mode == "prompt2langgloss":
-                poses, gloss_logits, quality_scores = self.model(
-                    texts,
-                    language,
-                    mode="prompt2langgloss",
-                    max_pose_length=max_length
-                )
-                return poses.cpu().numpy(), quality_scores.cpu().numpy(), gloss_logits.cpu().numpy()
-            
-            else:
-                raise ValueError(f"Unsupported mode: {mode}")
+            # 优化模型只支持基本生成，不区分mode
+            poses, quality_scores = self.model(texts, language, max_length=max_length)
+            return poses.cpu().numpy(), quality_scores.cpu().numpy()
     
     def generate_single(self, 
                        text: str, 
@@ -116,38 +102,18 @@ class SignLLMInference:
         logger.info(f"Generating sign language for: '{text}' in {language}")
         
         # 生成姿态
-        if mode == "mlsf":
-            poses, quality_scores = self.generate_poses([text], language, mode, max_length)
-            poses = poses[0]  # 取第一个样本
-            quality_scores = quality_scores[0]
-            
-            result = {
-                "text": text,
-                "language": language,
-                "mode": mode,
-                "poses": poses,
-                "quality_scores": quality_scores,
-                "num_frames": len(poses)
-            }
+        poses, quality_scores = self.generate_poses([text], language, mode, max_length)
+        poses = poses[0]  # 取第一个样本
+        quality_scores = quality_scores[0]
         
-        else:  # prompt2langgloss
-            poses, quality_scores, gloss_logits = self.generate_poses([text], language, mode, max_length)
-            poses = poses[0]
-            quality_scores = quality_scores[0]
-            gloss_logits = gloss_logits[0]
-            
-            # 解码gloss
-            gloss_ids = np.argmax(gloss_logits, axis=-1)
-            
-            result = {
-                "text": text,
-                "language": language,
-                "mode": mode,
-                "poses": poses,
-                "quality_scores": quality_scores,
-                "gloss_ids": gloss_ids,
-                "num_frames": len(poses)
-            }
+        result = {
+            "text": text,
+            "language": language,
+            "mode": mode,
+            "poses": poses,
+            "quality_scores": quality_scores,
+            "num_frames": len(poses)
+        }
         
         # 可视化
         if visualize and output_dir:
@@ -184,36 +150,18 @@ class SignLLMInference:
         
         results = []
         
-        if mode == "mlsf":
-            poses_batch, quality_scores_batch = self.generate_poses(texts, language, mode, max_length)
-            
-            for i, (text, poses, quality_scores) in enumerate(zip(texts, poses_batch, quality_scores_batch)):
-                result = {
-                    "text": text,
-                    "language": language,
-                    "mode": mode,
-                    "poses": poses,
-                    "quality_scores": quality_scores,
-                    "num_frames": len(poses)
-                }
-                results.append(result)
+        poses_batch, quality_scores_batch = self.generate_poses(texts, language, mode, max_length)
         
-        else:  # prompt2langgloss
-            poses_batch, quality_scores_batch, gloss_logits_batch = self.generate_poses(texts, language, mode, max_length)
-            
-            for i, (text, poses, quality_scores, gloss_logits) in enumerate(zip(texts, poses_batch, quality_scores_batch, gloss_logits_batch)):
-                gloss_ids = np.argmax(gloss_logits, axis=-1)
-                
-                result = {
-                    "text": text,
-                    "language": language,
-                    "mode": mode,
-                    "poses": poses,
-                    "quality_scores": quality_scores,
-                    "gloss_ids": gloss_ids,
-                    "num_frames": len(poses)
-                }
-                results.append(result)
+        for i, (text, poses, quality_scores) in enumerate(zip(texts, poses_batch, quality_scores_batch)):
+            result = {
+                "text": text,
+                "language": language,
+                "mode": mode,
+                "poses": poses,
+                "quality_scores": quality_scores,
+                "num_frames": len(poses)
+            }
+            results.append(result)
         
         # 保存结果
         if output_dir:
